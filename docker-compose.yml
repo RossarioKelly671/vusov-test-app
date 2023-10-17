@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 123
+            MYSQL_DATABASE: test_example
+            MYSQL_USER: vusov
+            MYSQL_PASSWORD: 123123
+        ports:
+            - "3306:3306"
+
+    redis:
+        image: 'redis:alpine'
+        restart: always
+        ports:
+            - '6379:6379'
+        volumes:
+            - cache:/data
+
+volumes:
+    cache:
+        driver: local
